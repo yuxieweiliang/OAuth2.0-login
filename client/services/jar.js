@@ -17,6 +17,9 @@ const MSG = {
 export default class Jar {
     constructor() {
         this.errorName = '[JarError]';
+
+        if(typeof window  === 'undefined') return;
+
         if (typeof URL === 'undefined') {
             throw this.toError(MSG.NO_URL);
         }
