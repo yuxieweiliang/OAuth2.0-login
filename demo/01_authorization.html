@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+一、 授权模式:<br/>
+<button id="open">艾森登陆</button><br/>
+<script src="./OpenSign.js"></script>
+<script>
+  /**
+   * 授权模式:
+   */
+  window.onload = function () {
+    const height = window.screen.availHeight - 30;
+    const width = window.screen.availWidth - 10;
+    const openSign = new OpenSign({
+      // origin: 'http://localhost:12542/authExpress/init.html',
+      origin: 'http://localhost:8063/oauth2.0/authorize?client_id=1&redirect_uri=http://localhost:12542/authExpress/01_authorization.html',
+      title: 'new login window',
+      config: {
+        height: height,
+        width: width,
+        // top: top,
+        // left: 500
+      }
+    });
+
+    console.log('window.opener : ', window.opener);
+
+    document.getElementById('open').addEventListener('click', openSign.open, false);
+
+
+    function receiveMessage(event) {
+      const {data, origin} = event;
+      const _data = JSON.parse(data);
+      // 我们能相信信息的发送者吗?  (也许这个发送者和我们最初打开的不是同一个页面).
+
+      /*if (origin !== "http://example.org"){
+        return;
+      }*/
+      if (_data.type === 'refresh') {
+        openSign.refresh(_data.data);
+      } else if (_data.type === 'close') {
+        openSign.close();
+      } else if (_data.type === 'loaded') {
+        openSign.loaded();
+      }
+      // event.source 是我们通过window.open打开的弹出页面 popup
+      // event.data 是 popup发送给当前页面的消息 "hi there yourself!  the secret response is: rheeeeet!"
+    }
+
+    /**
+     * 接收到通知之后，刷新 url
+     */
+    window.addEventListener("message", receiveMessage, false);
+    window.onbeforeunload = function () {
+      if (window.removeEventListener) {
+        window.removeEventListener("message", receiveMessage);
+      } else {
+        window.detachEvent('onmessage', receiveMessage)
+      }
+    };
+
+    /**
+     * 授权成功后，重定向到本页面
+     * 然后关闭本页面，通知 父页面 更新 code
+     */
+
+    if (window.opener) {
+      const href = window.opener.location.href;
+      const data = JSON.stringify({
+        type: 'refresh',
+        data: window.location.href
+      });
+      window.opener.postMessage(data, href);
+      window.close();
+    }
+  };
+</script>
+
+授权模式: 第二部， 获取 token<br/>
+<button id="token">同意登陆后，获取token</button><br/><br/>
+
+<script>
+  /**
+   * 授权模式: 第二部， 获取 token
+   */
+  document.getElementById('token').addEventListener('click', function () {
+    const code = window.location.search.substring(1).split('=')[1];
+    fetch(`http://localhost:8063/oauth2.0/access_token?client_id=1&client_secret=xxx&grant_type=authorization_code&code=${code}`)
+      .then(res => res.json()).then(res => console.log(res))
+  }, false);
+</script>
+
+
+第三步：根据获得的token，向资源服务器请求资源<br/>
+<button id="getOptions">艾森登陆</button><br/><br/>
+<script>
+  /**
+   * 授权模式:
+   */
+  var token = 'pbZTkoPFVn_85ZlMqLZxN6fhWKc=q4QrU6d3f7cd5f26961ec80a854cc60bda3d50c3a385a5bf1e8b8463d37ff623d56d7e231bbc165a16db1558b78949d858f6c840275545d475a359a2108b0aca84ac43ae3d206283fafe125e6e8d327efe1c9fc10f00cdc2afc789d565a2b7de6e1a437bc0ba121f40fb25bb4de8c65e0b3c13b6c77658cf5a0572d271abcb6efbbae4a388031470f725a035eec52e3b8c54ef4dd6e9665af7ec73e317eb60c40399a6ff477f396810afdbadd8c4c4916fb45e3d11f703e6b07370f4a9f5294033359c2b01b1177ce92c24324080762a7c0ba349a5c68692e5e750684353ce2c1f1b1cc2e8f7bcce51e8151494050b5d1a160e1417989d7da1b129c4057f095a7e61da1a35e79aaaa2b0ec236d835cbd3bc026b20b0121f1b12ec94329e4aa2176af7070ff3e21275cbede52d01659361fba658f65626d4ca918f81375768f2e5854dffc99869e9467262841625f8836320e5cbd3df3ba2dfbddfd4b50649030e919afdf310d5634f3ff024276bb3d64730f9eaa';
+
+  document.getElementById('getOptions').addEventListener('click', function () {
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
+      }
+    };
+
+    fetch('http://localhost:8063/user', options)
+      .then(res => res.json()).then(res => console.log(res))
+
+  }, false);
+</script>
+
+</body>
+</html>

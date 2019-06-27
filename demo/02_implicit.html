@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+二、简化模式:<br/>
+<button id="open">艾森登陆</button><br/>
+<script src="./OpenSign.js"></script>
+<script>
+  /**
+   * 授权模式:
+   */
+  window.onload = function () {
+    const height = window.screen.availHeight - 30;
+    const width = window.screen.availWidth - 10;
+    const openSign = new OpenSign({
+      // origin: 'http://localhost:12542/authExpress/init.html',
+      origin: 'http://localhost:8063/oauth2.0/authorize?client_id=1&redirect_uri=http://localhost:12542/authExpress/02_implicit.html&response_type=token',
+      title: 'new login window',
+      config: {
+        height: height,
+        width: width,
+        // top: top,
+        // left: 500
+      }
+    });
+
+    console.log('window.opener : ', window.opener);
+
+    document.getElementById('open').addEventListener('click', openSign.open, false);
+
+
+    function receiveMessage(event) {
+      const {data, origin} = event;
+      const _data = JSON.parse(data);
+      // 我们能相信信息的发送者吗?  (也许这个发送者和我们最初打开的不是同一个页面).
+
+      /*if (origin !== "http://example.org"){
+        return;
+      }*/
+      if (_data.type === 'refresh') {
+        openSign.refresh(_data.data);
+      } else if (_data.type === 'close') {
+        openSign.close();
+      } else if (_data.type === 'loaded') {
+        openSign.loaded();
+      }
+      // event.source 是我们通过window.open打开的弹出页面 popup
+      // event.data 是 popup发送给当前页面的消息 "hi there yourself!  the secret response is: rheeeeet!"
+    }
+
+    /**
+     * 接收到通知之后，刷新 url
+     */
+    window.addEventListener("message", receiveMessage, false);
+    window.onbeforeunload = function () {
+      if (window.removeEventListener) {
+        window.removeEventListener("message", receiveMessage);
+      } else {
+        window.detachEvent('onmessage', receiveMessage)
+      }
+    };
+
+    /**
+     * 授权成功后，重定向到本页面
+     * 然后关闭本页面，通知 父页面 更新 code
+     */
+
+    if (window.opener) {
+      const href = window.opener.location.href;
+      const data = JSON.stringify({
+        type: 'refresh',
+        data: window.location.href
+      });
+      window.opener.postMessage(data, href);
+      window.close();
+    }
+  };
+</script>
+
+</body>
+</html>
