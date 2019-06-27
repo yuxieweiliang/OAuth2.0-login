@@ -1,4 +1,4 @@
-一、 授权模式:
+一、 授权模式: # http://localhost:8063/demo/01_authorization.html
 
 1、 打开服务器，获取授权
     http://localhost:8063/oauth2.0/authorize?client_id=1&redirect_uri=http://localhost:12542/authExpress/index.html&response_type=token
