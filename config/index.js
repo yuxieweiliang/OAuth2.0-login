@@ -28,4 +28,10 @@ export default {
    * 服务端配置
    */
   production: production,
+
+
+  logger: {
+    name: 'program-api',
+    level: 'error'
+  }
 }

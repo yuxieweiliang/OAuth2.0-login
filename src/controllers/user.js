@@ -3,7 +3,7 @@ import md5 from 'md5';
 import jwt from 'jsonwebtoken';
 import orm from '../services/database';
 import { constructor, get, post, put, del } from '../services/controller';
-import { secret } from '../config/secret';
+import { secret } from '../../config/secret';
 import { isInteger, isString, getPagerOptions, getPositiveInteger, createDatabase } from '../services/utils';
 import tables from '../services/tables';
 import _ from 'lodash'

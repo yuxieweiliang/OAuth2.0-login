@@ -6,8 +6,7 @@ import cacheControl from 'koa-cache-control';
 import helmet from 'koa-helmet';
 import views from 'koa-views';
 
-import config from '../config';
-import { location } from "../../config";
+import config, { location } from "../../config";
 import returns from './returns';
 import httpLogger from './http-logger';
 import mixinUser from './mixinUser';

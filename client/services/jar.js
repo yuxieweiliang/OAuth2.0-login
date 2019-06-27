@@ -7,19 +7,20 @@ const MSG = {
     INVALID_HOST: 'Invalid remote server Host.',
 };
 
+
 /**
  * 网络请求
- * IE 兼容 ： url-polyfill url-search-params-polyfill 
+ * IE 兼容 ： url-polyfill url-search-params-polyfill
  * @method ajax http(s)的请求，请求方式自定义
  * 请求的返回值的解析方式，可选值：'arrayBuffer', 'blob', 'json', 'text', 'formData'
  */
 export default class Jar {
     constructor() {
         this.errorName = '[JarError]';
-        if (!URL) {
+        if (typeof URL === 'undefined') {
             throw this.toError(MSG.NO_URL);
         }
-        if (!URLSearchParams) {
+        if (typeof URLSearchParams === 'undefined') {
             throw this.toError(MSG.NO_URLSearchParams);
         }
     }
@@ -72,7 +73,7 @@ export default class Jar {
     async ajax(options, hooks) {
 
         hooks = Object.assign({}, hooks);
-        this.before(options, hooks.before); 
+        this.before(options, hooks.before);
 
         options.credentials = typeof options.credentials === 'string'
             ? options.credentials

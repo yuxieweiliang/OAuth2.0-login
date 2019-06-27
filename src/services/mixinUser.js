@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { secret } from '../config/secret'
+// import { secret } from '../config/secret'
 import oAuth2 from '../services/middleware/OAuth2.0';// 认证
 
 export default function mixinUser() {

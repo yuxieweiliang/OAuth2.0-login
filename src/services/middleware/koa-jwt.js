@@ -1,5 +1,5 @@
 import jwt from 'koa-jwt';
-import { secret } from '../../config/secret';
+import { secret } from '../../../config/secret';
 
 export default function koaJwt(app) {
   app.use(jwt({ secret }).unless(function (ctx) {

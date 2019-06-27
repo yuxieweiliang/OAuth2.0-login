@@ -8,7 +8,7 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import orm from '../services/database';
 import { constructor, get, post, put, del } from '../services/controller';
-import { secret } from '../config/secret';
+import { secret } from '../../config/secret';
 import { isInteger, isString, getPagerOptions, getPositiveInteger, createDatabase } from '../services/utils';
 import tables from '../services/tables';
 import _ from 'lodash';
