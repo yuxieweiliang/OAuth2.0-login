@@ -4,10 +4,10 @@
   "description": "<p align=\"center\">\r   <a href=\"http://github.com/zuiidea/antd-admin\">\r     <img alt=\"antd-admin\" height=\"64\" src=\"./docs/_media/logo.svg\">\r   </a>\r </p>",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server  --mode development --hot --watch --open --config ./webpack/config",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
     "build": "webpack --config ./webpack/config.web",
     "webpack": "webpack",
-    "start": "cross-env NODE_ENV=development nodemon index.js",
+    "start": "npm run dev",
     "node": "cross-env NODE_ENV=development node index.js",
     "create:page": "set NODE_ENV=development && node tool/createPage",
     "mongo": "mongod --dbpath ./db",

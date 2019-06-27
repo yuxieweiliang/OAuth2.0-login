@@ -1,3 +1,7 @@
+/**
+ * 配置
+ * 生产环境变量
+ */
 import { resolve } from 'path';
 
 const ROOT = '/data/program/';

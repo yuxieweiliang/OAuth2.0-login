@@ -1,3 +1,6 @@
+/**
+ * config 主入口
+ */
 import Database from './database';
 import Server from './server';
 import Location from './location';

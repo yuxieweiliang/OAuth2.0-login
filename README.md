@@ -1,40 +1,13 @@
-
-<p align="center">
-  <a href="http://github.com/zuiidea/antd-admin">
-    <img alt="antd-admin" height="64" src="./docs/_media/logo.svg">
-  </a>
-</p>
-
-<h1 align="center">OB Reading</h1>
-
-<div align="center">
-
-一套优秀的中后台前端解决方案
-
-[![antd](https://img.shields.io/badge/antd-^3.10.0-blue.svg?style=flat-square)](https://github.com/ant-design/ant-design)
-[![umi](https://img.shields.io/badge/umi-^2.2.1-orange.svg?style=flat-square)](https://github.com/umijs/umi)
-[![GitHub issues](https://img.shields.io/github/issues/zuiidea/antd-admin.svg?style=flat-square)](https://github.com/zuiidea/antd-admin/issues)
-[![MIT](https://img.shields.io/dub/l/vibe-d.svg?style=flat-square)](http://opensource.org/licenses/MIT)
-![Travis (.org)](https://img.shields.io/travis/zuiidea/antd-admin.svg)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/zuiidea/antd-admin/pulls)
-[![Gitter](https://img.shields.io/gitter/room/antd-admin/antd-admin.svg)](https://gitter.im/antd-admin/antd-admin)
-
-</div>
-
-
-
-
-
 ## 使用
 
 1. 下载项目代码。
 
 ```bash
-git clone git@github.com:yuxieweiliang/node-ant.git new-project
-cd new-project
+git clone git@codehub.devcloud.huaweicloud.com:Authorize00001/oAuth2.0.git authorize
+cd authorize
 ```
 
-2. 进入目录安装依赖，国内用户推荐使用 [cnpm](https://cnpmjs.org) 进行加速。
+2. 进入目录安装依赖。
 
 ```bash
 yarn install
@@ -46,131 +19,73 @@ yarn install
 npm install
 ```
 
-3. 启动作者端。
+3. 启动本地服务器。
 
 ```bash
-npm run dev:admin
+npm run dev
 ```
 
-4. 创建数据库。
-
-```bash
-npm run initpg
-```
-
-5. 启动本地服务器。
+或者
 
 ```bash
 npm start
 ```
 
-6. 启动完成后打开浏览器访问 [http://localhost:8081](http://localhost:8081)，如果需要更改启动端口，可在 `.env` 文件中配置。
-
-
-> 作者端前后端分离，读者端服务端渲染，app使用RN，只开发api。。
-
-
+6. 启动完成后打开浏览器访问 [http://localhost:8083](http://localhost:8083)，如果需要更改启动端口，可在 `/config/location` 文件中配置。
 
 
 ## 项目架构
 
 - client: 客户端
-  - admin: 作者端
-    - components: 组件
-    - reducers: 数据 store
-    - router: 路由
-    - src: 页面
-    - style: 公共样式
-    - views: 公共模板
-  - api: api
-  - app: app
-  - config: 配置
-  - utils: 工具函数
-  - web: 读者端
+    - components:                   组件
+    - config:                       配置
+    - controller:                   前端 js 入口
+    - models:                       api 请求 数据 model
+    - services:                     ajax 请求处理封装
+    - utils:                        工具函数
+    - root.less:                    公共样式
 
-- public: 公共资源
-  - images: 图片
+- config: 配置
 
-- server: 服务端
-  - controllers: API
-  - database: 数据库
-  - docs: 文档
-  - middleware: 中间件
-  - Schema: GraphQL
-  - socket: socket
-  - sql: API 使用到的sql
-  - webpack: react 服务端渲染配置
+- dist: 本地打包目录
 
-- tool: 工具
-  - config: 数据库配置（创建数据库时）
-  - createPage: 创建自定义组件默认内容
-  - PG_SQL: 创建数据库表格SQL语句
-  - 数据库: 数据库设计 & 输出API格式实例
+- bundle: 线上发布 - 打包路径
 
+- public: 公共资源 # 用户上传的各种资源
+    - demo:                         认证服务器请求示例
+    - images:                       图片
+    - assets:                       静态资源
+    - video:                        视频
+    - audio:                        音频
 
+- public: 静态资源 # 存放系统需要的文件
 
-# 页面路由
+- src: 服务端代码
+    - controllers:                  api 逻辑处理
+    - initial:                      数据库 初始化
+    - model:                        数据库 模型定义
+    - services:                     读者端
+        - database:                                 { 数据库 }
+        - middleware:                               { 中间件 } 入口
+        - redis:                                    redis 缓存
+        - socket:                                   web Socket
+        - controller:                               http 控制 GET POST PUT DELETE
+        - hooks:                                    帮助行数
+        - http-logger:                              浏览器端日志打印
+        - logger:                                   错入日志打印
+        - message:                                  请求错误信息
+        - middleware:                               { 中间件 } 入口
+        - mixinUser:                                { 中间件 } 从 token 中解析 user
+        - models:                                   { 数据库 } 模型引用
+        - relationship:                             { 数据库 } 关系引用
+        - returns:                                  格式化返回
+        - routers:                                  路由
+        - tables:                                   { 数据库 } 表引用
+        - utils:                                    工具函数
+    - webpack:                                      服务端渲染 react打包 webapck 配置
 
-    /login # 登陆
-    /register # 注册
-    /book # 书籍列表
-      /book/new # 新建
-      /book/edit # 编辑
-    /architecture # 架构列表
-      /architecture/new # 新建
-      /architecture/edit # 编辑
-    /database
-    /setting
+- views: 模板
 
-
-# 其他
-
-https://github.com/reactjs/express-react-views
-
-网站:
-
-设定：
-
-网站可以构建一个设定，其他人可以提出要求，作者可以同意采用。
-
-头脑风暴：
-
-可以做头脑风暴联想，单词的近义词，同类词，联想词。
-
-
-作家专区：
-
-首页/课堂/专栏/咨询
-
-我的专区：
-
-专区首页/作品管理/数据统计/稿酬收入/劳务收入/作家咨询/积分兑换/互动管理
-
-作品管理：
-
-作品设置/草稿箱/已发布章节/回收站
-
-作品设置：
-
-作品名称/首发站点/书号/作品类型/授权级别/编辑分组/字数/收藏/作品状态/作品标签/作品介绍/扉页寄语
-
-新建章节：
-
-选择章节/选择类型/统计字数/保存/发布
-
-新建作品：
-
-选择类型/目标读者/
-
-
-
-## 支持环境
-
-现代浏览器及 IE9。
-
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
-| --------- | --------- | --------- | --------- | --------- |
-| IE9, IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions
 
 
 

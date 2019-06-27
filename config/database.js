@@ -1,4 +1,8 @@
+/**
+ * 数据库配置
+ */
 import { isPro } from './environment';
+
 
 const setting = {
   pool: {

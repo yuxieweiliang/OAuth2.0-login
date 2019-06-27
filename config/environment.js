@@ -1,5 +1,9 @@
 // export const DEVELOPMENT = Symbol('development');
 
+/**
+ * 环境变量
+ * @type {string}
+ */
 export const DEVELOPMENT = 'development';
 export const PRODUCTION = 'production';
 

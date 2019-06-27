@@ -1,3 +1,6 @@
+/**
+ * 数据库 - 所有表名
+ */
 export default {
   attribute: "attributes",
   category: "categories",
