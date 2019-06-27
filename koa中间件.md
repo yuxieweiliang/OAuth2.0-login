@@ -1,7 +1,7 @@
 No.1: (koa-router)[https://github.com/ZijianHe/koa-router]
 路由是Web框架必不可少的基础功能，koa.js为了保持自身的精简，并没有像Express.js自带了路由功能，因此koa-router做了很好的补充，作为koa星数最多的中间件，koa-router提供了全面的路由功能，比如类似Express的app.get/post/put的写法，URL命名参数、路由命名、支持加载多个中间件、嵌套路由等。其他可选路由中间件：koa-route, koa-joi-router, koa-trie-router
 
-No.2: (koa-bodyparser)[https://github.com/koajs/bodyparser]
+No.2: (koa-body)[https://github.com/dlau/koa-body]
 koa.js并没有内置Request Body的解析器，当我们需要解析请求体时需要加载额外的中间件，官方提供的koa-bodyparser是个很不错的选择，支持x-www-form-urlencoded, application/json等格式的请求体，但不支持form-data的请求体，需要借助 formidable 这个库，也可以直接使用 koa-body 或 koa-better-body
 
 No.3 (koa-views)[https://github.com/queckezz/koa-views]
@@ -25,5 +25,3 @@ No.8: (koa-compress)[https://github.com/koajs/compress]
 No.9: (koa-logger)[https://github.com/koajs/logger]
 koa-logger提供了输出请求日志的功能，包括请求的url、状态码、响应时间、响应体大小等信息，对于调试和跟踪应用程序特别有帮助，koa-bunyan-logger 提供了更丰富的功能。
 
-No.10: (koa-convert)[https://github.com/koajs/convert]
-对于比较老的使用Generate函数的koa中间件(< koa2)，官方提供了一个灵活的工具可以将他们转为基于Promise的中间件供Koa2使用，同样也可以将新的基于Promise的中间件转为旧式的Generate中间件。

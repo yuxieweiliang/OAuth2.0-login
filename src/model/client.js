@@ -28,6 +28,10 @@ export default {
     type: Sequelize.STRING(255),
     comment: '形象'
   },
+  website: {
+    type: Sequelize.STRING(255),
+    comment: '主页网址'
+  },
   intro: {
     type: Sequelize.TEXT,
     comment: '简介'
