@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+
+
+  fetch('./pcas-code.json').then(res => {
+    console.log(res);
+
+    return res.json()
+  }).then(res => {
+    var data = [];
+
+    function create(target, parent) {
+
+      for(var i = 0, len = target.length; i< len; i++) {
+        var item = target[i];
+
+        data.push({
+          code: item.code,
+          name: item.name,
+          parent: parent
+        });
+
+        if(item.children) {
+          create(item.children, item.code)
+        }
+      }
+    }
+    create(res);
+
+    console.log(data)
+  })
+</script>
+</body>
+</html>

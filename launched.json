@@ -1,0 +1,18 @@
+{
+  "name": "program-api",
+  "script": "./start.js",
+  "cwd": "./",
+  "instances": 2,
+  "exec_mode": "cluster",
+  "error_file": "./logs/err.log",
+  "out_file": "./logs/out.log",
+  "log_date_format": "YYYY-MM-DD HH:mm Z",
+  "merge_logs": true,
+  "node_args": "",
+  "ignore_watch": [
+    "node_modules"
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
