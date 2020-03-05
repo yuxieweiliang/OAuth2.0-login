@@ -29,7 +29,7 @@ const setting = {
 const database = {
   host: 'localhost',
   dialect: 'mysql',
-  database: 'program',
+  database: 'program_oAuth',
   username: 'root',
   /*dialectOptions: {
     socketPath: '/tmp/mysql.sock' // 指定套接字文件路径

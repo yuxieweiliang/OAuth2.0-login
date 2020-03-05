@@ -58,16 +58,6 @@ export default {
     type: Sequelize.TEXT,
     comment: '简介'
   },
-  grade: {
-    type: Sequelize.BIGINT,
-    defaultValue: 0,
-    comment: '年级'
-  },
-  classes: {
-    type: Sequelize.BIGINT,
-    defaultValue: 0,
-    comment: '班级'
-  },
 
   /**
    * 通过 relationship 创建

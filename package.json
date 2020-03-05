@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "build": "webpack --config ./webpack/config.web",
+    "build": "webpack --config ./src/webpack/config.web",
     "webpack": "webpack",
-    "start": "npm run dev",
+    "start": "cross-env NODE_ENV=development node index.js",
     "node": "cross-env NODE_ENV=development node index.js",
     "create:page": "set NODE_ENV=development && node tool/createPage",
     "mongo": "mongod --dbpath ./db",

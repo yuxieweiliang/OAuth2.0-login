@@ -48,6 +48,7 @@ export default function (app) {
    * static source
    */
   app.use(koaStatic(location.public));
+  app.use(koaStatic(location.static));
   app.use(koaStatic(location.dist));
   app.use(koaStatic(location.node_modules));
 

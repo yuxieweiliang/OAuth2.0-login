@@ -151,6 +151,7 @@ class Operation {
       // 定义表名
       tableName: tableName,
 
+      hasComment: { type: Sequelize.INTEGER, comment: "I'm a comment!" },
       // 表所在的数据库
       // schema: database
     });

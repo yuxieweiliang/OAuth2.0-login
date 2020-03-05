@@ -1,10 +1,12 @@
 import React from 'react';
-import itemImage from'./img/item.jpg';
-import logo from './img/logo.png';
-import user from './img/user.png';
-import qq from './img/QQ.png';
-import wx from './img/wx.png';
-import './main.css';
+const itemImage = '/images/item.jpg';
+const logo = '/images/logo.png';
+const user = '/images/user.png';
+const qq = '/images/QQ.png';
+const wx = '/images/wx.png';
+
+
+
 const links = [
     {
         title: '关于我们',
@@ -91,7 +93,7 @@ const links = [
     }
 ];
 const TodoList =['33333','33333','33333','33333','33333','33333','33333']
-class Main extends React.Component{
+class Home extends React.Component{
     state={
         modalIsOpen:'none',
         atUserItems:false,
@@ -198,4 +200,4 @@ class Main extends React.Component{
 
 
 }
-export default Main;
+export default Home;

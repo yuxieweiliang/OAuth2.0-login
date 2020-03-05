@@ -13,7 +13,7 @@ import {getAbsPath} from "../utils";
 const router = new Router();
 const root = location.containers;
 const _pattern = './*.js';
-const unless = { ext: ['css'], path: [/\/register/, /\/login/, /\/oauth2.0/,] };
+const unless = { ext: ['css'], path: [/\/register/, /\/login/, /\/oauth2.0/, /\//,] };
 
 export default function setRouter(app) {
   const pattern = pa.join(root, _pattern);

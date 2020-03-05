@@ -24,11 +24,10 @@ export default class Login {
     const pool = await createDatabase();
     let str = renderToString(<LoginComponent next_url={queries.next} />);
     console.log('--------------------2', queries.next);
-    ctx.session.user = {a: 'aaaaaaaaaaa'};
     await ctx.render('index', {
+      name: 'allow',
       initialState: queries.next,
       root: str,
-      script: 'login.build.js',
     });
     // ctx.body = str;
     // console.log(ctx.body);
@@ -41,7 +40,6 @@ export default class Login {
     const pool = await createDatabase();
     let str = renderToString(<LoginComponent />);
     console.log('----------------------2', ctx.sessions);
-    // ctx.sessions.set('fffffffffffffff');
     await ctx.render('index', {
       root: str,
       script: 'login.build.js',

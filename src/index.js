@@ -2,12 +2,19 @@ import Koa from 'koa'
 import initial from './initial'
 import { location } from '../config'
 import loadMiddleware from './services/middleware'
-
+import { isPro } from '../config/environment';
 // console.log(location);
-initial(function (initialzed) {
+initial(function (initialized) {
 
-  if (initialzed) {
+  if (initialized) {
     const app = new Koa();
+
+    app.use(async function(ctx, next) {
+      ctx.state = {
+        isPro
+      };
+      await next()
+    });
 
     loadMiddleware(app);
 

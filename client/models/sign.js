@@ -1,17 +1,17 @@
 import { CODE } from '../config/code';
 import base64 from '../utils/base64';
-const { request, store, image } = services;
-
+// const { request, store, image } = services;
+const store = {get() {}, set(){}, remove(){}};
+const image = {};
 export default new class Sign {
     // 登录
     async in(ua) {
-        const res = await request.query('signin', {
+        /*const res = await request.query('signin', {
             body: {
                 account: ua.account,
                 pwd: ua.pwd
             }
         });
-
         if (res && res.code === 0) {
             const data = res.data;
             const { rights, info, token } = data;
@@ -23,11 +23,11 @@ export default new class Sign {
             return true;
         }
 
-        return res;
+        return res;*/
     }
 
     async up(body) {
-        return await request.query('signup', { body });
+        return /*await request.query('signup', { body });*/
     }
 
 

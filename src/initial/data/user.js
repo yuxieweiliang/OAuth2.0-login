@@ -11,7 +11,6 @@ export default [
     mobile: 12345678912,
     email: '541979581@qq.com',
     intro: '系统管理员',
-    school: null,
     role: 2,
     group: null,
     status: 1
@@ -25,7 +24,6 @@ export default [
     mobile: 12345678912,
     email: '541979581@qq.com',
     intro: '普通用户',
-    school: null,
     role: 1,
     group: 5,
     status: 1
@@ -38,7 +36,6 @@ export default [
     mobile: 12345678912,
     email: '541979581@qq.com',
     intro: '幻想世界的旅行者',
-    school: 1,
     role: 3,
     group: 7,
     status: 1
@@ -51,7 +48,6 @@ export default [
     mobile: 12345678912,
     email: '541979581@qq.com',
     intro: '普通用户',
-    // school: null,
     // role: null,
     // group: null,
     status: 1
@@ -64,7 +60,6 @@ export default [
     mobile: 12345678912,
     email: '541979581@qq.com',
     intro: '普通用户',
-    school: null,
     role: 3,
     group: 8,
     status: 1
@@ -77,7 +72,6 @@ export default [
     mobile: 12345678912,
     email: '541979581@qq.com',
     intro: '普通用户',
-    school: null,
     role: 4,
     group: 9,
     status: 1

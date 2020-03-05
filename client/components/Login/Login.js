@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class Login extends React.Component {
+export default class Login extends React.PureComponent {
   render () {
     let { next_url } = this.props;
     if(typeof window !== 'undefined') {

@@ -22,7 +22,7 @@ export default class Login extends React.Component {
     }
     console.log('-------------', authorize_url);
     return (
-      <form method="post" action={ this.state.authorize_url }  className="container">
+      <form method="post" action={ authorize_url }  className="container">
         <div className="title">是否同意使用你的账号登陆？</div>
         <img className="logo" src="/images/logo.png" alt="logo" onClick={() => alert('fffffffff')}/>
           <div className="btn-container">

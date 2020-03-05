@@ -26,10 +26,10 @@ export default class Login {
 
     let str = renderToString(<LoginComponent next_url={queries.next} />);
     console.log('--------------------2', queries.next);
-    await ctx.render('index', {
+    await ctx.render('login', {
+      name: 'login',
       initialState: queries.next || '/',
       root: str,
-      script: 'login.build.js',
     });
     // ctx.body = str;
     // console.log(ctx.body);
@@ -63,10 +63,6 @@ export default class Login {
       } else {
         ctx.body = new ctx.Tolerance('User', 'sign', 8)
       }
-
-      // console.log('----------------------2', queries);
-      // console.log('----------------------2', ctx.sessions);
-      // console.log('----------------------2', queries.next);
 
       await next()
     }

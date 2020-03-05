@@ -7,5 +7,8 @@ Object.defineProperties(BASE, {
   request: setDescriptor(request),
 });
 
-window.services = BASE;
+if(typeof window !== "undefined") {
+  window.services = BASE;
+}
+
 export default BASE;

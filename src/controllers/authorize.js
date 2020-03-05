@@ -13,20 +13,20 @@ import { isInteger, isString, getPagerOptions, getPositiveInteger, createDatabas
 import tables from '../services/tables';
 import _ from 'lodash';
 import AllowComponent from '../../client/components/Allow';
-import AuthorizeLoginComponent from '../../client/components/AuthorizeLogin';
+import Login from '../../client/components/Login';
 
 const database = orm.configures.default;
-
+const AuthorizeLoginComponent = Login.Authorize;
 
 const myGrants = {};
 
 /**
  * 同意认证:
  * GET:
- * /oauth/authorize ? client_id = 1 & response_type = token & redirect_uri=http://localhost:3000
+ * /oauth2.0/authorize ? client_id = 1 & response_type = token & redirect_uri=http://localhost:3000
  *
  * POST:
- *  /oauth/authorize ? client_id = 1 & redirect_uri = http://localhost:3000 & response_type=token & x_user_id = MCS2L4YEoNfLzX-2esG7nQDicEs%3DT8yv9RVTcd4e809b0c0e16035b0e2e2b9cca6c88
+ *  /oauth2.0/authorize ? client_id = 1 & redirect_uri = http://localhost:3000 & response_type=token & x_user_id = MCS2L4YEoNfLzX-2esG7nQDicEs%3DT8yv9RVTcd4e809b0c0e16035b0e2e2b9cca6c88
  *  {
  *    client_id: 'xxxxxxxxx',
  *    x_user_id: 'xxxxxxxxx',
@@ -42,16 +42,16 @@ const myGrants = {};
  *  }
  */
 @constructor('oauth2.0')
-export default class Login {
+export default class OAuth2 {
   @get('/login')
   async loginPage(ctx, next) {
     const queries = ctx.queries;
     let str = renderToString(<AuthorizeLoginComponent next_url={queries.next} />);
 
     await ctx.render('index', {
+      name: 'login',
       initialState: queries.next || '/',
       root: str,
-      script: 'authorizeLogin.build.js',
     });
 
     await next();
@@ -82,21 +82,25 @@ export default class Login {
     }
 
     // authorization form will be POSTed to same URL, so we'll have all params
-    let authorize_url = ctx.req.url;
 
+    // console.log(ctx.req);
     if(!user_id) {
-      await ctx.redirect('/oauth2.0/login?next=' + encodeURIComponent(authorize_url));
+      ctx.status = 300;
+      await ctx.redirect('/oauth2.0/login?next=' + encodeURIComponent(ctx.req.url));
       return;
     }
-    authorize_url += '&' + querystring.stringify({ x_user_id: oAuth2.serializer.stringify(user_id) });
+    redirect_uri += '?' + querystring.stringify({ x_user_id: oAuth2.serializer.stringify(user_id) });
     /**
      * 用户已登录
      * 显示 允许 界面
      */
-    await ctx.render('index', {
-      initialState: authorize_url,
+
+
+    ctx.status = 200;
+    await ctx.render('allow', {
+      name: 'allow',
+      initialState: redirect_uri,
       root: str,
-      script: '/allow.build.js',
     });
   }
 

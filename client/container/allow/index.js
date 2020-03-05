@@ -4,5 +4,4 @@ import Allow from '../../components/Allow';
 import '../../root.less';
 import './allow.less';
 
-console.log('---------------');
 ReactDOM.render(<Allow />, document.getElementById('root'));
