@@ -1,6 +1,6 @@
 // 初始化脚本
 import orm from '../database'
-import name from '../config/table-name'
+import name from '../database/table-name'
 
 import initial from './initial'
 

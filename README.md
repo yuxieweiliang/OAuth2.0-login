@@ -101,9 +101,24 @@ npm start
 
 
 
+user: {
+  sylstem_role: [2, 3],
+  user_role: [2, 3]
+}
 
-
-
+sylstem_role: {
+    info: '',
+    sylstem_right: [ user, some ],
+    state: '',
+}
+user_role: {
+  info: '',
+  sylstem_right: [ user, some ],
+  state: '',
+}
+- sylstem_right # 系统权限
+- user_right # 用户权限
+-
 
 
 

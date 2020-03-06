@@ -11,13 +11,14 @@ import {getAbsPath} from "../utils";
 
 // Router
 const router = new Router();
-const root = config.location.containers;
-const _pattern = './*.js';
+const apis = config.location.apis;
+const pages = config.location.pages;
+const pattern = './*.js';
 const unless = { ext: ['css'], path: [/\/register/, /\/login/, /\/oauth2.0/, /\//,] };
 
 export default function setRouter(app) {
-  const pattern = pa.join(root, _pattern);
-  glob.sync(pattern).forEach(require);
+  glob.sync(pa.join(apis, pattern)).forEach(require);
+  glob.sync(pa.join(pages, pattern)).forEach(require);
 
   for (let [options, controllers] of routers) {
     let located = options.target[prefixs];
@@ -37,6 +38,7 @@ export default function setRouter(app) {
       rule = located + options.path
     }
 
+    console.log(options.method, rule)
     router[options.method](rule, ...controllers)
   }
 

@@ -1,7 +1,7 @@
 import React from 'react'
-import request from '../services/request';
+import axios from 'axios';
 
-export default class Login extends React.Component {
+export default class Login extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,19 +10,19 @@ export default class Login extends React.Component {
   }
 
   onAllow = () => {
-    request.query('getAuth').then((res) => {
+    axios.post('/oauth2.0/authorize').then((res) => {
       console.log(res);
     });
   };
 
   render () {
-    let { authorize_url } = this.props;
+    let { authorize_url } = this.state;
     if(typeof window !== 'undefined') {
       authorize_url = window.__INITIAL__STATE__
     }
     console.log('-------------', authorize_url);
     return (
-      <form method="post" action={ authorize_url }  className="container">
+      <form method="post" action="/login"  className="container">
         <div className="title">是否同意使用你的账号登陆？</div>
         <img className="logo" src="/images/logo.png" alt="logo" onClick={() => alert('fffffffff')}/>
           <div className="btn-container">

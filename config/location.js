@@ -1,5 +1,5 @@
 import { resolve } from "path";
-
+const root = process.cwd()
 /**
  * 本地资源配置 - 用户上传的各种资源
  * public {
@@ -20,17 +20,18 @@ import { resolve } from "path";
  *
  */
 export default {
-  port: 8063,
-  protocol: "http",
-  host: 'localhost',
-  domain: 'api.domain.com',
-  root: process.cwd(),
-  public: resolve(process.cwd(), 'public'),
-  dist: resolve(process.cwd(), 'dist'),
-  bundle: resolve(process.cwd(), 'bundle'),
-  static: resolve(process.cwd(), 'static'),
-  containers: resolve(process.cwd(), 'src', 'controllers'),
-  node_modules: resolve(process.cwd(), 'node_modules'),
+  root,
+  port:               8063,
+  protocol:           'http',
+  host:               'localhost',
+  domain:             'api.domain.com',
+  public:             resolve(root, 'public'),
+  dist:               resolve(root, 'dist'),
+  bundle:             resolve(root, 'bundle'),
+  static:             resolve(root, 'static'),
+  node_modules:       resolve(root, 'node_modules'),
+  apis:               resolve(root, 'src', 'controllers', 'api'),
+  pages:              resolve(root, 'src', 'controllers', 'page'),
 
   // 证书
   certificate: {

@@ -9,7 +9,6 @@ import { constructor, get, post, put, del } from '../../services/controller';
 import { secret } from '../../../config/secret';
 import { isInteger, isString, getPagerOptions, getPositiveInteger, createDatabase } from '../../services/utils';
 import _ from 'lodash';
-import LoginComponent from '../../../client/page/oauth2.0'
 
 const database = orm.configures.default;
 

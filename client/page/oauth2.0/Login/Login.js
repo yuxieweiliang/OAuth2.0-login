@@ -8,7 +8,7 @@ export default class Login extends React.PureComponent {
     }
 
     return (
-      <form className="container" method="post" action="/login">
+      <form className="container" method="post" action="/api/login">
         <input type="hidden" name="next" value={ next_url }/>
         <img className="logo" src="/images/logo.png" alt="logo"/>
         <div className="input-box">

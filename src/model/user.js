@@ -70,11 +70,6 @@ export default {
     type: Sequelize.STRING(255),
     comment: '分组',
     defaultValue: 6
-  },
-  school: {
-    type: Sequelize.BIGINT,
-    defaultValue: 0,
-    comment: '用户所在学校（{null | 0}：没有学校，{id}：学校id）'
   },*/
   status: {
     type: Sequelize.SMALLINT,

@@ -9,7 +9,7 @@ import { constructor, get, post, put, del } from '../../services/controller';
 import { secret } from '../../../config/secret';
 import { isInteger, isString, getPagerOptions, getPositiveInteger, createDatabase } from '../../services/utils';
 import _ from 'lodash';
-import HomeComponent from '../../../client/components/Home';
+import HomeComponent from '../../../client/page/home/Home';
 
 const database = orm.configures.default;
 
@@ -33,7 +33,6 @@ export default class Login {
 
     let str = renderToString(<HomeComponent next_url={queries.next} />);
     console.log('--------------------2', user_id);
-
 
     await ctx.render('index', {
       name: 'home',

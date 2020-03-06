@@ -2,11 +2,15 @@ import orm from '../database'
 // 初始化脚本
 import Users from './data/user'
 import Clients from './data/client'
+import Roles from './data/role';
+import Rights from './data/rights';
+import Jurisdiction from './data/jurisdiction';
 import tables from '../database/tables'
 
 function toArray(array) {
  return Array.isArray(array) ? array : [array];
 }
+
 
 /**
  * 初始化成功之后执行的函数
@@ -27,6 +31,28 @@ async function initial(callback) {
 
   if (isOk.length) return typeof callback === 'function' && callback(true);
 
+  // 权限
+  model = await tables.rightModel(database);
+  values = toArray(Rights);
+  isOk = await model.bulkCreate(values, { ignoreDuplicates : true });
+  if (!isOk) return typeof callback === 'function' && callback(false);
+  console.log('------------- rightModel', !!isOk);
+
+  // 角色
+  model = await tables.roleModel(database);
+  values = toArray(Roles);
+  isOk = await model.bulkCreate(values);
+  if (!isOk) return typeof callback === 'function' && callback(false);
+  console.log('------------- roleModel', !!isOk);
+
+  // 权限分组关系
+  model = await tables.jurisdictionModel(database);
+  const jurisdiction = await Jurisdiction(database);
+  values = toArray(jurisdiction);
+  isOk = await model.bulkCreate(values, { ignoreDuplicates : true });
+  if (!isOk) return typeof callback === 'function' && callback(false);
+  console.log('------------- jurisdictionModel', !!isOk);
+
   /**
    * { 创建 } 用户
    */
@@ -42,7 +68,6 @@ async function initial(callback) {
   values = toArray(Clients);
   isOk = await model.bulkCreate(values, { ignoreDuplicates : true });
   if (!isOk) return typeof callback === 'function' && callback(false);
-
 
   /**
    * { 完成 }

@@ -184,11 +184,21 @@ const config = {
   ]
 }
 
-const viewPath = method.assemblyPath(ROOTS, '/client/container/')
+const viewPath = method.assemblyPath(ROOTS, '/client/page/')
 const files = fs.readdirSync(viewPath,'utf-8')
 
+
 files.map(item => {
-  config.entry[item.split('.')[0]] = method.assemblyPath(viewPath, `${item}`)
+  if (item === 'oauth2.0') {
+    const viewPath = method.assemblyPath(ROOTS, '/client/page/' + item)
+    const files = fs.readdirSync(viewPath,'utf-8')
+    files.map(item => {
+      console.log(item)
+      config.entry['oauth2.0.' + item.split('.')[0]] = method.assemblyPath(viewPath, `${item}`)
+    })
+  } else {
+    config.entry[item.split('.')[0]] = method.assemblyPath(viewPath, `${item}`)
+  }
 })
 
 // console.log(config.entry, viewPath)
