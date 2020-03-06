@@ -1,30 +1,31 @@
-import pa from 'path';
-import logger from 'koa-logger';
-import koaStatic from 'koa-static';
-import compress from 'koa-compress';
-import cacheControl from 'koa-cache-control';
-import helmet from 'koa-helmet';
-import views from 'koa-views';
+import pa from 'path'
+import logger from 'koa-logger'
+import koaStatic from 'koa-static'
+import compress from 'koa-compress'
+import cacheControl from 'koa-cache-control'
+import helmet from 'koa-helmet'
+import views from 'koa-views'
 
-import config, { location } from "../../config";
-import returns from './returns';
-import httpLogger from './http-logger';
-import mixinUser from './mixinUser';
+import * as config from "../../config"
+import returns from './returns'
+import httpLogger from './http-logger'
+import mixinUser from './mixinUser'
 
-import setRouter from './middleware/router';
-import tolerance from './middleware/tolerance';
-import koaWebpack from './middleware/koa-webpack';
-import bodyParser from './middleware/koa-body';
-import cors from './middleware/cors';
-import jwt from './middleware/koa-jwt';
-import redis from './redis';
+import setRouter from './middleware/router'
+import tolerance from './middleware/tolerance'
+import bodyParser from './middleware/koa-body'
+import cors from './middleware/cors'
+import koaWebpack from './middleware/koa-webpack'
+import jwt from './middleware/koa-jwt'
+import redis from './redis'
 
+const { location } = config
 
 export default function (app) {
   /**
    * 模板
    */
-  app.use(views(pa.resolve(__dirname, '../../views'), { map: { html: 'ejs' } }));
+  app.use(views(pa.resolve(__dirname, '../../views'), { map: { html: 'ejs' } }))
 
   /**
    * 必须包含 验证字段
@@ -33,7 +34,7 @@ export default function (app) {
     headers: ['authorization', 'content-type'],
     origin: true,
     credentials: true // 证书
-  }));
+  }))
 
   /**
    * 过滤网络攻击
@@ -41,34 +42,36 @@ export default function (app) {
    */
   app.use(helmet.xssFilter({
     setOnOldIE: true
-  }));
+  }))
 
   /**
    * 静态资源
-   * static source
+   * static
+   * 用户上传的资源
+   * public
    */
-  app.use(koaStatic(location.public));
-  app.use(koaStatic(location.static));
-  app.use(koaStatic(location.dist));
-  app.use(koaStatic(location.node_modules));
+  app.use(koaStatic(location.public))
+  app.use(koaStatic(location.static))
+  app.use(koaStatic(location.dist))
+  app.use(koaStatic(location.node_modules))
 
-  console.log(location.public);
+  console.log(location.public)
 
   /**
    * 处理 body
    * process message.body
    */
-  bodyParser(app);
+  bodyParser(app)
 
   /**
    * 添加 redis 缓存
    */
-  redis(app);
+  redis(app)
   /**
    * 服务端渲染
    * webpack
    */
-  koaWebpack(app);
+  // koaWebpack(app)
 
   /**
    * jwt 加密
@@ -78,13 +81,13 @@ export default function (app) {
   /**
    * gzip 压缩
    */
-  app.use(compress());
+  app.use(compress())
 
   /**
    * 混入用户
    * mixinUser
    */
-  app.use(mixinUser());
+  app.use(mixinUser())
 
   /**
    * 缓存
@@ -92,13 +95,13 @@ export default function (app) {
    */
   app.use(cacheControl({
     public: 'public'
-  }));
+  }))
 
   /**
    * 错误处理
    * API Error handler
    */
-  app.use(tolerance);
+  app.use(tolerance)
 
   /**
    * 打印日志
@@ -113,7 +116,7 @@ export default function (app) {
   /**
    * 添加路由
    */
-  setRouter(app);
+  setRouter(app)
 
   /**
    * 标准化返回数据

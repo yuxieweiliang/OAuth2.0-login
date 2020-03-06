@@ -1,34 +1,33 @@
 import Koa from 'koa'
-import initial from './initial'
+import initial from './database/initial'
 import { location } from '../config'
 import loadMiddleware from './services/middleware'
-import { isPro } from '../config/environment';
+import { isPro } from '../config/environment'
+
 // console.log(location);
 initial(function (initialized) {
 
   if (initialized) {
-    const app = new Koa();
+    const app = new Koa()
 
     app.use(async function(ctx, next) {
       ctx.state = {
         isPro
-      };
+      }
       await next()
-    });
+    })
 
     loadMiddleware(app);
 
     app.listen(location.port, () => {
 
-      console.log(`API Server Address: ${location.protocol}://${location.host}:${location.port}`);
+      console.log(`API Server Address: ${location.protocol}://${location.host}:${location.port}`)
 
     })
   } else {
     throw new Error('Startup failed. Please check the initialization script')
   }
-});
-
-
+})
 
 /*
 import Koa from 'koa';

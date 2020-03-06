@@ -4,14 +4,14 @@ import oAuth2 from './OAuth2.0';
 import pa from "path";
 import glob from 'glob';
 
-import { location } from "../../../config";
+import * as config from "../../../config";
 
 import {prefixs, routers} from "../routers";
 import {getAbsPath} from "../utils";
 
 // Router
 const router = new Router();
-const root = location.containers;
+const root = config.location.containers;
 const _pattern = './*.js';
 const unless = { ext: ['css'], path: [/\/register/, /\/login/, /\/oauth2.0/, /\//,] };
 

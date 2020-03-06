@@ -3,13 +3,13 @@ import md5 from 'md5';
 import jwt from 'jsonwebtoken';
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import orm from '../services/database';
-import { constructor, get, post, put, del } from '../services/controller';
-import { secret } from '../../config/secret';
-import { isInteger, isString, getPagerOptions, getPositiveInteger, createDatabase } from '../services/utils';
-import tables from '../services/tables';
+import orm from '../../database'
+import tables from '../../database/tables'
+import { constructor, get, post, put, del } from '../../services/controller';
+import { secret } from '../../../config/secret';
+import { isInteger, isString, getPagerOptions, getPositiveInteger, createDatabase } from '../../services/utils';
 import _ from 'lodash';
-import LoginComponent from '../../client/components/Login'
+import LoginComponent from '../../../client/page/oauth2.0'
 
 const database = orm.configures.default;
 

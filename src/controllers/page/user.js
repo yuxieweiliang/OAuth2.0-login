@@ -1,14 +1,14 @@
-import Sequelize from 'sequelize';
-import md5 from 'md5';
-import jwt from 'jsonwebtoken';
-import orm from '../services/database';
-import { constructor, get, post, put, del } from '../services/controller';
-import { secret } from '../../config/secret';
-import { isInteger, isString, getPagerOptions, getPositiveInteger, createDatabase } from '../services/utils';
-import tables from '../services/tables';
+import Sequelize from 'sequelize'
+import md5 from 'md5'
+import jwt from 'jsonwebtoken'
+import orm from '../../database'
+import { constructor, get, post, put, del } from '../../services/controller'
+import { secret } from '../../../config/secret';
+import { isInteger, isString, getPagerOptions, getPositiveInteger, createDatabase } from '../../services/utils'
+import tables from '../../database/tables'
 import _ from 'lodash'
 
-const database = orm.configures.default;
+const database = orm.configures.default
 
 
 @constructor('user')
@@ -34,7 +34,6 @@ export default class User {
       attributes: ['id', 'name', 'avatar', 'role', 'group']
     };
 
-    console.log('-----------------------------------------------1');
     ctx.body = await model.findAll(options);
     await next()
   }
@@ -84,7 +83,6 @@ export default class User {
       options.where.father = queries.father
     }
 
-    console.log('-----------------------------------------------2');
     // console.log(options);
     ctx.body = await model.findOne(options);
     // console.log(ctx.body);
@@ -110,7 +108,6 @@ export default class User {
     const grade = getPositiveInteger(ctx.params[0]);
     const classes = getPositiveInteger(ctx.params[1]);
 
-    console.log('-----------------------------------------------3');
     const options = {
       offset: pager.offset,
       limit: pager.limit,
@@ -460,7 +457,6 @@ export default class User {
             console.log('school: ', school.toJSON());
           }
 
-          console.log('rights: ', rights);
           const token = jwt.sign({
             id: user.id,
             // account: user.account,

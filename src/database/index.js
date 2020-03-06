@@ -1,6 +1,5 @@
-import Sequelize from 'sequelize';
-import { database } from '../../../config';
-import { isProd } from '../utils';
+import Sequelize from 'sequelize'
+import { database, isPro } from '../../config'
 import autoCreateDatabaseMysql from './auto-create-databse-mysql'
 
 
@@ -59,7 +58,7 @@ class Operation {
       }
     }catch (e) {
       throw new Error(`Database
-      isProd:（${isProd}）
+      isPro:（${isPro}）
       port:（${config.port}）
       host:（${config.host}）
       dialect:（${config.dialect}）

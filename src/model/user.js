@@ -13,7 +13,7 @@ export default {
     allowNull: false,
     comment: '用户账号'
   },
-  pwd: {
+  password: {
     type: Sequelize.STRING(255),
     allowNull: false,
     comment: '用户密码'
@@ -27,7 +27,7 @@ export default {
     type: Sequelize.STRING(255),
     comment: '用户昵称或者姓名'
   },
-  sex: {
+  gender: {
     type: Sequelize.SMALLINT,
     defaultValue: 0,
     comment: '用户性别 { (null|0): 保密, 1: 男, 2: 女 }'
@@ -89,7 +89,7 @@ export default {
   人是整体的，资源是按照学院划分的。
 
   async getUserById(id) {
-    const sql = 'SELECT name, sex, mobile, email, avatar, intro, joined_at, logined_at FROM user WHERE id=:id'
+    const sql = 'SELECT name, sex, mobile, email, avatar, intro FROM user WHERE id=:id'
     return await orm.query('program', sql, function (queryTypes) {
       return {
         replacements: {

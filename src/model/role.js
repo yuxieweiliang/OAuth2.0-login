@@ -19,11 +19,6 @@ export default {
     comment: '角色的权限（0：没有任何权限 [1, 2, 3, ...number]：权限列表）',
     defaultValue: 0,
   },*/
-  school: {
-    type: Sequelize.SMALLINT,
-    defaultValue: 0,
-    comment: '{null: 非学校, 0: 表示公共, {id}: 学校私有}'
-  },
   intro: {
     type: Sequelize.TEXT,
     comment: '角色的描述'

@@ -185,7 +185,7 @@ class Main extends React.Component{
                     </div>
                     <hr/>
                     <div className="footer-bottom">
-                        <p>©2018 艾森智能 版权所有</p>
+                        <p>©2018 版权所有 版权所有</p>
                     </div>
                 </div>
             </div>

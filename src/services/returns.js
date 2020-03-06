@@ -12,7 +12,7 @@ function normalized(ctx) {
   if (Array.isArray(ctx.body) || isObject(ctx.body)) {
     ctx.body = {
       data: ctx.body,
-      code: 0
+      code: 200
     }
   }
 }

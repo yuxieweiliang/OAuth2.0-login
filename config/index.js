@@ -1,40 +1,36 @@
+// config 主入口
+
 /**
- * config 主入口
+ * 环境
  */
-import Database from './database';
-import Server from './server';
-import Location from './location';
-import Production from './production';
+export { isDev, isPro } from './environment'
 
-export const database = Database;
-export const server = Server;
-export const location = Location;
-export const production = Production;
+/**
+ * 数据库配置
+ */
+export { default as database } from './database'
 
-export default {
-  /**
-   * 数据库配置
-   */
-  database: Database,
+/**
+ * 服务器配置
+ */
+export { default as server } from './server'
 
-  /**
-   * 服务器配置
-   */
-  server: Server,
+/**
+ * 本地环境配置
+ */
+export { default as location } from './location'
 
-  /**
-   * 本地配置
-   */
-  location: Location,
+/**
+ * 线上环境配置
+ */
+export { default as production }  from './production'
 
-  /**
-   * 服务端配置
-   */
-  production: production,
-
-
-  logger: {
-    name: 'program-api',
-    level: 'error'
-  }
+/**
+ * 打印喷织
+ * @type {{level: string, name: string}}
+ */
+export const logger = {
+  name: 'program-api',
+  level: 'error'
 }
+

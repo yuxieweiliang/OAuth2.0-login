@@ -36,13 +36,13 @@ const database = {
   },*/
 };
 
-export const development = {
+const development = {
   ...database,
   port: 3306,
   password: '123456'
 };
 
-export const production = {
+const production = {
   ...database,
   port: 3306,
   password: 'as123456'

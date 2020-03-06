@@ -1,23 +1,22 @@
-const webpack = require('webpack');
-const fs = require('fs');
-const path = require('path');
-// const OpenBrowserPlugin = require('open-browser-webpack-plugin'); // 打开指定浏览器
-const CleanWebpackPlugin = require('clean-webpack-plugin'); // 清理
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const WebpackMd5Hash = require('webpack-md5-hash');
-const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-const marked = require("marked");
-const method = require("../utils");
-import { location } from "../../config";
+const webpack = require('webpack')
+const fs = require('fs')
+const path = require('path')
+// const OpenBrowserPlugin = require('open-browser-webpack-plugin') // 打开指定浏览器
+const CleanWebpackPlugin = require('clean-webpack-plugin') // 清理
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+// const WebpackMd5Hash = require('webpack-md5-hash')
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
+const marked = require("marked")
+const method = require("../utils")
+import { location } from "../../config"
 
 // 合并webpack配置
-let merge = require('webpack-merge');
-let window;
-// 项目根目录,请确保命令在根目录执行 sails-webpack2;
-const ROOTS = process.cwd();
+let merge = require('webpack-merge')
+// 项目根目录,请确保命令在根目录执行 sails-webpack2
+const ROOTS = process.cwd()
 // 打包目录
-const publicPath = location.dist;
+const publicPath = location.dist
 const config = {
   mode: 'development',
 
@@ -140,7 +139,7 @@ const config = {
 
   resolve: {
     modules: [path.resolve(ROOTS, 'node_modules')],
-    extensions: ['.js', '.jsx', '.es6', '.less'],
+    extensions: ['.js', '.jsx', '.less'],
     alias: {
       moment: "moment/min/moment-with-locales.min.js"
       //'type': path.resolve(rootDir, './lib/jquery.min.js')
@@ -183,14 +182,14 @@ const config = {
       minChunks: Infinity,
     }),*/
   ]
-};
+}
 
-const viewPath = method.assemblyPath(ROOTS, '/client/container/');
-const files = fs.readdirSync(viewPath,'utf-8');
+const viewPath = method.assemblyPath(ROOTS, '/client/container/')
+const files = fs.readdirSync(viewPath,'utf-8')
 
 files.map(item => {
-  config.entry[item.split('.')[0]] = method.assemblyPath(viewPath, `${item}`);
-});
+  config.entry[item.split('.')[0]] = method.assemblyPath(viewPath, `${item}`)
+})
 
-// console.log(config.entry, viewPath);
-module.exports = config;
+// console.log(config.entry, viewPath)
+module.exports = config

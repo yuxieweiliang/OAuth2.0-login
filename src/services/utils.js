@@ -1,6 +1,5 @@
-import orm from "./database";
+import orm from "../database";
 
-const NODE_ENV = String(process.env.NODE_ENV || 'development').trim();
 
 // to Array
 export function toArray(arr) {
@@ -15,9 +14,6 @@ export function getAbsPath(path) {
     return path.startsWith('/') ? path : `/${path}`
   }
 }
-
-export const env = NODE_ENV;
-export const isProd = env === 'production';
 
 // obj is isInteger
 export function isInteger(n) {
@@ -41,7 +37,7 @@ export function getPagerOptions(queries) {
   }
 
   if (isInteger(queries.pageSize)) {
-    pageSize = queries.pageSize * 1
+    pageSize = +queries.pageSize
   }
 
   pager.offset = pageSize * (pageNo - 1);
@@ -76,12 +72,12 @@ export function getObjectIntersection(target, refere, ignore) {
 
 /**
  * 获取数据库
- * @param school_Id
+ * @param id
  * @returns {Promise<*>}
  */
-export async function createDatabase(school_Id = null) {
+export async function createDatabase(id = null) {
   const database = orm.configures.default;
-  const name = school_Id ? `${database}_${school_Id}` : database;
+  const name = id ? `${database}_${id}` : database;
   console.log(`:::::::::::::::::  used database: ${name}  :::::::::::::::::::`);
   return await orm.use(name);
 }

@@ -1,8 +1,8 @@
-import orm from '../services/database';
+import orm from '../database'
 // 初始化脚本
-import Users from './data/user';
-import Clients from './data/client';
-import tables from '../services/tables'
+import Users from './data/user'
+import Clients from './data/client'
+import tables from '../database/tables'
 
 function toArray(array) {
  return Array.isArray(array) ? array : [array];

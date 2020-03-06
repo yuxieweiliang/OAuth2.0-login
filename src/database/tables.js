@@ -1,7 +1,6 @@
 // 初始化脚本
-import orm from '../services/database';
-import models from './models';
-
+import orm from '../database';
+import models from '../model';
 
 export default {
   initialModel: async (database) => await orm.define(
@@ -17,11 +16,6 @@ export default {
   clientModel: async (database) => await orm.define(
     database.config.database,
     await models.clientModel(database)
-  ),
-
-  schoolModel: async (database) => await orm.define(
-    database.config.database,
-    await models.schoolModel(database)
   ),
 
   roleModel: async (database) => await orm.define(

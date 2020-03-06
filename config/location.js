@@ -20,7 +20,7 @@ import { resolve } from "path";
  *
  */
 export default {
-  port: 8083,
+  port: 8063,
   protocol: "http",
   host: 'localhost',
   domain: 'api.domain.com',

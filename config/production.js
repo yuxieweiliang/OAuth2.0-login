@@ -2,22 +2,25 @@
  * 配置
  * 生产环境变量
  */
-import { resolve } from 'path';
+import { resolve } from 'path'
 
-const ROOT = '/data/program/';
-const SERVER =  resolve(ROOT, 'server');
-const SRC = resolve(SERVER, 'src');
+const root = '/data/program/'
 
 export default {
   /**
    * 根目录
    */
-  root: ROOT,
+  root,
+
+  /**
+   * 服务路径
+   */
+  server: resolve(root, 'server'),
 
   /**
    * 代码目录
    */
-  src: SRC,
+  src: resolve(root, 'server', 'src'),
 
   /**
    * 打包目录
@@ -25,14 +28,9 @@ export default {
   destination: './dist',
 
   /**
-   * 服务路径
-   */
-  server: SERVER,
-
-  /**
    * 公共资源目录
    */
-  static: '/data/program/static/api',
+  static: resolve(root, 'static', 'api'),
 
   /**
    * 服务器地址
@@ -40,9 +38,9 @@ export default {
    */
   service: [
     {
-      host: '114.116.28.122',
+      host: '39.107.87.157/',
       username: 'root',
-      password: 'hw_xacxzx2018'
+      password: 'xyf.3342'
     }
   ],
 

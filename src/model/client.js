@@ -26,7 +26,7 @@ export default {
   },
   figure: {
     type: Sequelize.STRING(255),
-    comment: '形象'
+    comment: '形象logo'
   },
   website: {
     type: Sequelize.STRING(255),
@@ -40,7 +40,7 @@ export default {
     type: Sequelize.STRING(255),
     unique: true,
     allowNull: false,
-    comment: '简介'
+    comment: '密钥'
   },
   status: {
     type: Sequelize.SMALLINT,
